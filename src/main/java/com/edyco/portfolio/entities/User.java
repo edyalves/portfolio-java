@@ -1,13 +1,18 @@
 package com.edyco.portfolio.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -16,6 +21,11 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+
+	@OneToMany(mappedBy = "employee")
+	private List<Company> companies = new ArrayList<>();
+	@OneToMany(mappedBy = "student")
+	private List<Education> educations = new ArrayList<>();
 	
 	public User() {
 	}
@@ -41,6 +51,10 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
+	public List<Company> getCompanies() {
+		return companies;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -62,6 +76,4 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 }
