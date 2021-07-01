@@ -1,7 +1,6 @@
 package com.edyco.portfolio.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,39 +10,33 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_company")
-public class Company implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+@Table(name="tb_skill")
+public class Skill implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-	private Instant start;
-	private Instant finish;
 	private String description;
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "employee_id")
-	private User employee;
+	@JoinColumn(name="skill_id")
+	private User skills;
 	
-	public Company() {}
+	public Skill() {}
 
-	public Company(Long id, String name, Instant start, Instant finish, String description, User employee) {
+	public Skill(Long id, String name, String description, User skills) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.start = start;
-		this.finish = finish;
 		this.description = description;
-		this.employee = employee;
+		this.skills = skills;
 	}
 
 	public Long getId() {
@@ -62,22 +55,6 @@ public class Company implements Serializable{
 		this.name = name;
 	}
 
-	public Instant getStart() {
-		return start;
-	}
-
-	public void setStart(Instant start) {
-		this.start = start;
-	}
-
-	public Instant getFinish() {
-		return finish;
-	}
-
-	public void setFinish(Instant finish) {
-		this.finish = finish;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -86,12 +63,12 @@ public class Company implements Serializable{
 		this.description = description;
 	}
 
-	public User getEmployee() {
-		return employee;
+	public User getSkills() {
+		return skills;
 	}
 
-	public void setEmployee(User employee) {
-		this.employee = employee;
+	public void setSkills(User skills) {
+		this.skills = skills;
 	}
 
 	@Override
@@ -110,7 +87,7 @@ public class Company implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Company other = (Company) obj;
+		Skill other = (Skill) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

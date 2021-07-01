@@ -1,0 +1,33 @@
+package com.edyco.portfolio.resources;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.edyco.portfolio.entities.Skill;
+import com.edyco.portfolio.services.SkillService;
+
+@RestController
+@RequestMapping(value="/skills")
+public class SkillResource {
+
+	@Autowired
+	private SkillService service;
+	
+	@GetMapping
+	public ResponseEntity<List<Skill>> findAll(){
+		List<Skill> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value="/{id}")
+	public ResponseEntity<Skill> findById(@PathVariable Long id){
+		Skill obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
+	}
+}

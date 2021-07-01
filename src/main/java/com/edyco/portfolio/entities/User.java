@@ -26,6 +26,8 @@ public class User implements Serializable {
 	private List<Company> companies = new ArrayList<>();
 	@OneToMany(mappedBy = "student")
 	private List<Education> educations = new ArrayList<>();
+	@OneToMany(mappedBy = "skills")
+	private List<Skill> skills = new ArrayList<>();
 	
 	public User() {
 	}
@@ -53,6 +55,14 @@ public class User implements Serializable {
 
 	public List<Company> getCompanies() {
 		return companies;
+	}
+
+	public List<Education> getEducations() {
+		return educations;
+	}
+	
+	public List<Skill> getSkills(){
+		return skills;
 	}
 
 	@Override
